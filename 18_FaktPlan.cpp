@@ -1,31 +1,28 @@
 // 18_FaktPlan.cpp : Defines the entry point for the console application.
-//
-// 13_MedStud.cpp : Defines the entry point for the console application.
-//
+//18.	З клавіатури ввести послідовність даних з результатами роботи бригади за тиждень: <День>, <План>, <Фактичний 
+//виробіток>. Роздрукувати введені дані у вигляді таблиці, відсортувавши їх у порядку зростання плану. Визначити дні з
+//найвищим і найменшим відсотком виконання плану
 #include"stdafx.h"
-#include <stdio.h>
-#include<stdlib.h>
-#include <string.h>
 #include<iomanip>
 #include<iostream>
-#include<ios>
 #include<string>
 using namespace std;
+// структура для збереження даних про роботу бригади за день
 struct Brigada 
 {
 	char days[10];
 	double plan;
 	double fact;
 };
-const int n=3;
-void sort_Plan(Brigada *p);
+const int n=5;
+void sort_Plan(Brigada *p);   //сортує дані у порядку зростання плану
 
 int main()
 { 
 
-Brigada *x=new Brigada[n];
+Brigada *x=new Brigada[n];   //виділяємо память на дані, які збираємося ввести
 cout<<"Enter day, planned output, actual output : \n";
-for(int i=0;i<n;i++)
+for(int i=0;i<n;i++)        //вводимо
 { 
 	cout<<i+1<<". ";
 	cin>>x[i].days>>x[i].plan>>x[i].fact;
@@ -33,7 +30,7 @@ for(int i=0;i<n;i++)
 sort_Plan(x);
 int nmax=0, nmin=0;
 double max=(x[0].fact/x[0].plan)*100, min=max;
-for(int i=1;i<n;i++)
+for(int i=1;i<n;i++)     //шукаємо день з мінімальним і максимальним відсотком виконання плану
 { 
 	double temp=(x[i].fact/x[i].plan)*100;
 	if(temp>max) {max=temp; nmax=i;}
@@ -49,7 +46,7 @@ delete[]x;
 system("pause");
 return 0;
 }
-
+//сортуємо методом бульбашки
 void sort_Plan(Brigada *p)
 {
 int i,j;
